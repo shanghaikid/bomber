@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<style type="text/css">
+			body, html, #l-map {width:100%; height:100%; overflow:hidden; margin:0;}
+		</style>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=LRaV4RUoxOmmthNvqAK1Nzpx"></script>
+		<title>Bomber</title>
+		
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/searchInRectangle.js"></script>
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="css/bomber.css" rel="stylesheet" type="text/css"/>
+		<script src="js/respond.js"></script>
+		
+		<script type="text/javascript">
+			$(function() {
+				map = new BMap.Map("l-map");
+				map.centerAndZoom("上海", 14);
+				
+				var navigationControl = new BMap.NavigationControl();
+				map.addControl(navigationControl);
+				var scaleControl = new BMap.ScaleControl();
+				map.addControl(scaleControl);
+				
+				map.addControl(new BMap.MapTypeControl());
+				
+				map.addEventListener("click", showDialog);
+				map.enableScrollWheelZoom();
+				
+				searchInRect = new BMapLib.SearchInRectangle(map, '', {renderOptions:{strokeWeight:2, strokeColor:'red', autoClose:true, alwaysShowOverlay:false, onSearchComplete:pullComplete}});
+				
+				$(document).keydown(function(event) {
+					if(event.keyCode == 13) {
+						return false;
+					};
+				});
+				$("#search_text").keydown(function(event) {
+					if(event.keyCode == 13 && $("#search_text").val() != '') {
+						search();
+					};
+				});
+				
+				pullBox= {};
+				circleArray = [];
+			});
+		</script>
+	</head>
+	<body>
+		<div id="l-map" style="z-index:1; position:absolute;">
+			
+		</div>
+		<div style="z-index:2; position:absolute; margin-left:100px; margin-top:10px;">
+			<form class="form-inline" role="form"> 
+				<input id='search_text' class='form-control' style='width:400px;' type='text' placeholder='Please input the name to search'>
+				<input class='btn btn-info' type='button' value='搜索' onclick='search()'>
+				<input id='pullBox' class='btn btn-warning button-c' type='button' value='选择框' onclick='switchToPullBox()'>
+			</form>
+		</div>
+	</body>
+</html>

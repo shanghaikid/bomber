@@ -1,0 +1,33 @@
+	.label-a {
+		width:60px;
+		float:left;
+		text-align:right;
+		margin-left:10px;
+	}
+	.label-b {
+		width:60px;
+		float:left;
+		text-align:right;
+		margin-left:35px;
+	}
+	.label-c {
+		width:60px;
+		float:left;
+		text-align:right;
+		margin-left:70px;
+	}
+	.label-d {
+		width:60px;
+		float:left;
+		text-align:right;
+		margin-left:130px;
+	}
+	.button-a {
+		margin-left:15px;
+	}
+	.button-b {
+		margin-left:47px;
+	}
+	.button-c {
+		margin-left:100px;
+	}
